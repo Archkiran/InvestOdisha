@@ -10,7 +10,9 @@ No build step, paid hosting or server is required. Keep the image folders, `thum
 
 ## Editing and sign-in
 
-The site opens in visitor mode. **Admin sign in** currently shows a clearly labelled demonstration, not authentication or access control. No passwords are collected. Editing tools save changes only in that browser; edits do not update this repository or other visitors. A real administration backend can be connected later.
+The site opens in visitor mode. On Cloudflare, **Admin sign in** uses server-side password verification and an expiring HttpOnly session cookie once private production secrets are configured. See `ADMIN_LOGIN_SETUP.md`. GitHub Pages has no authentication backend and directs administrators to Cloudflare. Offline files retain a clearly labelled demonstration.
+
+Editing tools still save changes only in that browser; edits do not update this repository or other visitors. Server-verified login is not a shared content-management backend, and local browser state is not a server security boundary.
 
 The published version contains the bundled event data. Browser-local edits/uploads made in the offline version are not automatically transferred to this website.
 
