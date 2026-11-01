@@ -3,7 +3,7 @@
   const timeline=document.getElementById('timeline'),overlay=document.getElementById('overlay');
   if(!timeline||!overlay)return;
   const panel=overlay.querySelector('.modal'),content=document.getElementById('modalcontent');
-  let currentEvent=null,opener=null,fromHistory=false,decorating=false;
+  let currentEvent=null,opener=null,fromHistory=false,decorating=false,initialAddressPending=true;
   const reduced=()=>window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const smooth=()=>reduced()?'auto':'smooth';
   const eventId=card=>card?.getAttribute('onclick')?.match(/showEvent\('([^']+)'\)/)?.[1];
@@ -111,7 +111,7 @@
   const priorCloseModal=closeModal;
   closeModal=()=>{
     const id=currentEvent;currentEvent=null;priorCloseModal();backgroundInert(false);
-    if(!fromHistory)syncAddress(null);
+    if(!fromHistory&&!initialAddressPending)syncAddress(null);
     const target=opener?.isConnected&&!overlay.contains(opener)?opener:findCard(id)||document.getElementById('search');
     target?.focus({preventScroll:true});opener=null;
   };
@@ -125,6 +125,7 @@
   });
   async function openAddress(){
     const id=new URL(location.href).searchParams.get('event');
+    initialAddressPending=false;
     fromHistory=true;
     try{
       if(id&&events.some(e=>e.id===id))await showEvent(id);
