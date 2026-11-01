@@ -98,10 +98,14 @@
     if(currentEvent!==id||!overlay.classList.contains('show'))return;
     if(!fromHistory)syncAddress(id,changed);
     const tools=document.createElement('div');tools.className='event-share-tools';
-    const copy=document.createElement('button');copy.className='btn';copy.type='button';copy.textContent='Copy link';copy.setAttribute('aria-label','Copy link to this event');
+    const copy=document.createElement('button');copy.className='btn';copy.type='button';copy.textContent='Share event';copy.setAttribute('aria-label','Share event');
     const feedback=document.createElement('span');feedback.setAttribute('role','status');feedback.setAttribute('aria-live','polite');tools.append(copy,feedback);
     copy.addEventListener('click',async()=>{
       const url=sharedUrl(id);
+      if(navigator.share&&window.matchMedia('(max-width:700px)').matches){
+        try{await navigator.share({title:record.title,url});feedback.textContent='Event shared.';return;}
+        catch(error){if(error.name==='AbortError')return;}
+      }
       try{await navigator.clipboard.writeText(url);feedback.textContent='Event link copied.';}
       catch{
         feedback.textContent='Copy this event link:';
@@ -110,6 +114,14 @@
     });
     content.querySelector('.event-share-tools')?.remove();
     const meta=content.querySelector('.meta');if(meta)meta.after(tools);else content.prepend(tools);
+    // Keep collection URLs intact, but give them one consistent visitor-facing name.
+    for(const link of content.querySelectorAll('a'))if(/\b(?:photo|photograph)s?\s+collection\b/i.test(link.textContent))link.textContent='Photo gallery ↗';
+    const galleryLink=Array.from(content.querySelectorAll('.chem-head a')).find(link=>/photo gallery/i.test(link.textContent));
+    if(galleryLink)tools.insertBefore(galleryLink,feedback);
+    else if(content.querySelector('.chem-cover img,.chem-gallery img,.gallery img')){
+      const gallery=document.createElement('button');gallery.className='btn';gallery.type='button';gallery.textContent='Photo gallery';
+      gallery.addEventListener('click',()=>{const image=content.querySelector('.chem-cover img,.chem-gallery img,.gallery img');image?.click();});tools.insertBefore(gallery,feedback);
+    }
     describePhotos();
   };
   const priorCloseModal=closeModal;
