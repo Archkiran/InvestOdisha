@@ -1,0 +1,14 @@
+.slswca-modal .chem-gallery{grid-template-columns:minmax(0,640px);justify-content:center}
+.slswca-modal .chem-photo-button img{aspect-ratio:auto;height:auto;object-fit:contain}
+.slswca-modal .chem-cover img{max-height:420px;object-fit:contain}
+.slswca-metrics{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:20px 0}
+.slswca-metrics>div{padding:18px;border-radius:8px;background:#f5f1ea;border:1px solid #e7ded2}
+.slswca-metrics strong{font:800 24px Manrope,sans-serif;letter-spacing:-.04em;color:#a33c30;display:block}
+.slswca-metrics span{font-size:11px;color:#7d756d;display:block;margin-top:6px}
+.slswca-table-wrap{overflow-x:auto}
+.slswca-projects{border-collapse:collapse;width:100%;font-size:13px;margin:16px 0;line-height:1.5}
+.slswca-projects th{text-align:left;color:#75695e;font-size:10px;text-transform:uppercase;letter-spacing:.08em;background:#f8f6f2}
+.slswca-projects td,.slswca-projects th{padding:12px;border-bottom:1px solid #e6e1da;vertical-align:top}
+.slswca-projects td:first-child{font-weight:600;width:60%}
+.slswca-source{display:inline-block;color:var(--red);font-weight:700;font-size:12px;margin:4px 0 12px;text-decoration:none}
+@media(max-width:500px){.slswca-metrics strong{font-size:20px}.slswca-metrics>div{padding:13px}.slswca-projects td,.slswca-projects th{padding:9px}}
