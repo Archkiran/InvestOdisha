@@ -1,4 +1,6 @@
 /* Shared mobile treatment for the timeline, all event modules, and editing forms. */
+/* Programmatic heading focus announces the event without drawing a selection-like box. */
+.modal h2[tabindex="-1"]:focus,.modal h3[tabindex="-1"]:focus{outline:none}
 #archive[data-timeline-loading]{position:relative;min-height:65vh}
 #archive[data-timeline-loading]>:not(.timeline-loading){visibility:hidden;pointer-events:none}
 .timeline-loading{position:absolute;top:24px;left:36px;right:36px;margin:0;padding:20px 0;color:#737b80;font-size:15px;line-height:1.6}
