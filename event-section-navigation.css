@@ -1,0 +1,20 @@
+/* Align all filter boxes to the compact Clear filters control. */
+.filters{align-items:center}
+.filters .search input,.filters select,.filters>.btn{height:44px;min-height:44px;box-sizing:border-box;margin:0;border-radius:4px}
+.filters .search input{padding-top:0;padding-bottom:0;line-height:normal}
+.filters select{padding-top:0;padding-bottom:0;line-height:normal}
+.filters>.btn{display:inline-flex;align-items:center;justify-content:center;padding-top:0;padding-bottom:0;white-space:nowrap}
+.filters .search::before{top:50%;transform:translateY(-50%);line-height:1}
+/* Reserve a narrow gutter so markers never sit over photographs or copy. */
+.modal.has-section-rail{padding-right:38px}
+.event-section-rail{position:fixed;z-index:22;top:50%;transform:translateY(-50%);width:30px}
+.event-section-rail-list{display:flex;flex-direction:column;align-items:center;max-height:calc(80vh - 80px);overflow-y:auto;overflow-x:hidden;scrollbar-width:thin;padding:5px 0}
+.event-section-marker{display:flex;align-items:center;justify-content:center;flex:0 0 24px;width:28px;height:24px;padding:0;border:0;background:transparent;cursor:pointer}
+.event-section-marker span{display:block;width:14px;height:3px;background:#a7aaad;border-radius:3px;transition:background-color .15s,width .15s}
+.event-section-marker[aria-current=location] span{background:var(--red);width:23px;box-shadow:0 0 0 3px #a4000012}
+.event-section-marker:hover span,.event-section-marker:focus-visible span{background:var(--red);width:23px}
+.event-section-marker:focus-visible{outline:2px solid var(--red);outline-offset:-1px;border-radius:4px}
+.event-section-tooltip{position:fixed;z-index:24;max-width:230px;background:#fff;color:#26313b;border:1px solid #e2dfdb;box-shadow:0 4px 20px #0002;border-radius:6px;padding:8px 11px;font-size:12px;line-height:1.5;pointer-events:none}
+.event-section-tooltip[hidden]{display:none}
+@media(max-width:600px){.modal.has-section-rail{padding-right:30px}.event-section-rail{width:26px}.event-section-marker{width:24px;flex-basis:26px;height:26px}.event-section-marker span{width:12px}.event-section-marker[aria-current=location] span{width:18px}.event-section-tooltip{max-width:200px}}
+@media(prefers-reduced-motion:reduce){.event-section-marker span{transition:none}}
