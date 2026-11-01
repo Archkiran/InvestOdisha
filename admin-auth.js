@@ -18,7 +18,7 @@
     form.addEventListener('submit',async event=>{event.preventDefault();const submit=document.getElementById('admin-login-submit'),message=document.getElementById('admin-login-error'),password=form.elements.password;submit.disabled=true;message.textContent='';try{const result=await api('POST',{username:form.elements.username.value.trim(),password:password.value});password.value='';if(!result.authenticated)throw Error('Sign-in was not confirmed.');applySession(true);}catch(error){password.value='';message.textContent=error.message;}finally{submit.disabled=false;}});
     document.getElementById('admin-username').focus();
   };
-  api().then(state=>{if(state.authenticated)applySession(true);}).catch(()=>{});
+  api().then(state=>{if(state.authenticated)applySession(true);}).catch(()=>{}).finally(()=>{document.documentElement.dataset.timelineAuthReady='true';document.dispatchEvent(new Event('timeline-auth-ready'));});
   // Re-check an existing session when returning to this tab; fail closed offline.
   document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible'&&signedIn)api().then(state=>applySession(state.authenticated)).catch(()=>applySession(false));});
 })();

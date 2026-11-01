@@ -1,0 +1,16 @@
+.ecard:focus-visible,.btn:focus-visible,.chem-text-button:focus-visible,.back-to-top:focus-visible,.mobile-timeline-nav select:focus-visible{outline:3px solid #a40000;outline-offset:4px}
+.timeline-results{color:#70777d;font-size:13px;margin:0 0 15px}
+.empty-state h3{font-size:23px;color:var(--ink);margin:0 0 10px}.empty-state p{line-height:1.7;margin:0 0 18px}
+.event-share-tools{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin:18px 0}.event-share-tools [role=status]{font-size:13px;color:#626a72}
+.event-share-fallback{width:100%;display:grid;gap:5px;font-size:13px}.event-share-fallback input{width:100%;padding:10px;border:1px solid #ccc;border-radius:4px}
+.mobile-timeline-nav{display:none}
+.back-to-top{position:fixed;right:24px;bottom:24px;z-index:8;border:1px solid #a40000;border-radius:24px;background:#fff;color:#a40000;padding:11px 17px;box-shadow:0 3px 14px #0002;font:600 14px 'Titillium Web',sans-serif;cursor:pointer}
+.back-to-top[hidden]{display:none}
+.monthheading,.yearheading{scroll-margin-top:calc(var(--timeline-header-height,160px) + 90px)}
+@media(max-width:700px){
+ .mobile-timeline-nav{display:flex;gap:10px;position:sticky;top:var(--timeline-header-height,160px);z-index:4;background:#faf9f6;border-top:1px solid #e6e5e1;border-bottom:1px solid #e6e5e1;padding:10px 0;margin-bottom:15px}
+ .mobile-timeline-nav label{flex:1;min-width:0;display:grid;gap:3px;color:#6d7379;font-size:12px}
+ .mobile-timeline-nav select{width:100%;min-height:42px;max-width:100%;border:1px solid #ddd;background:#fff;border-radius:4px;padding:7px;color:var(--ink);font-size:15px}
+ .back-to-top{right:14px;bottom:max(14px,env(safe-area-inset-bottom));padding:10px 14px}
+ .empty-state{padding:40px 12px}.event-share-tools .btn{min-height:42px}
+}
