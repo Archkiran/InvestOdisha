@@ -2,7 +2,7 @@
 (()=>{
   const content=document.getElementById('modalcontent');if(!content)return;
   const viewer=document.createElement('dialog');viewer.className='event-photo-viewer';viewer.setAttribute('aria-label','Event photo gallery');document.body.append(viewer);
-  let photos=[],index=0,request=0,returnFocus=null;
+  let photos=[],index=0,request=0,returnFocus=null,detachSwipe=null,preloads=[];
   let mainImage,caption,count,strip;
   const makeButton=(label,text,action)=>{const button=document.createElement('button');button.type='button';button.setAttribute('aria-label',label);button.textContent=text;button.addEventListener('click',action);return button;};
   function draw(){
@@ -15,6 +15,11 @@
     const active=strip.children[index];
     // Scroll the strip only, never the underlying page or event window.
     strip.scrollTo({left:Math.max(0,active.offsetLeft-strip.offsetLeft-strip.clientWidth/2+active.offsetWidth/2),behavior:'auto'});
+    // Warm at most two adjacent images, not the whole event collection.
+    preloads=[];
+    if(photos.length>1)for(const i of new Set([(index+1)%photos.length,(index-1+photos.length)%photos.length])){
+      const next=new Image();next.decoding='async';next.src=photos[i].data;preloads.push(next);
+    }
   }
   function step(amount){if(!photos.length)return;index=(index+amount+photos.length)%photos.length;draw();}
   async function open(image,trigger){
@@ -28,7 +33,9 @@
     viewer.replaceChildren();
     const toolbar=document.createElement('div');toolbar.className='event-photo-toolbar';count=document.createElement('span');count.setAttribute('aria-live','polite');
     const controls=document.createElement('div');controls.append(makeButton('Previous photo','←',()=>step(-1)),makeButton('Next photo','→',()=>step(1)),makeButton('Close photo gallery','Close ×',()=>viewer.close()));toolbar.append(count,controls);
-    const stage=document.createElement('div');stage.className='event-photo-stage';mainImage=document.createElement('img');stage.append(mainImage);
+    const stage=document.createElement('div');stage.className='event-photo-stage';stage.setAttribute('aria-label','Photo viewer. Swipe left for next photo or right for previous photo.');mainImage=document.createElement('img');mainImage.draggable=false;stage.append(mainImage);
+    const hint=document.createElement('span');hint.className='event-photo-swipe-hint';hint.textContent='Swipe left or right';stage.append(hint);
+    detachSwipe?.();detachSwipe=window.attachPhotoSwipe?.(stage,amount=>{step(amount);hint.hidden=true;});
     caption=document.createElement('p');caption.className='event-photo-caption';
     strip=document.createElement('nav');strip.className='event-photo-filmstrip';strip.setAttribute('aria-label','Photographs in this event');
     photos.forEach((photo,i)=>{
@@ -51,7 +58,7 @@
     if(event.key==='ArrowRight'||event.key==='ArrowLeft'){event.preventDefault();step(event.key==='ArrowRight'?1:-1);if(event.target.closest('.event-photo-filmstrip'))strip.children[index].focus({preventScroll:true});}
     if(event.key==='Home'||event.key==='End'){event.preventDefault();index=event.key==='Home'?0:photos.length-1;draw();}
   });
-  viewer.addEventListener('close',()=>{request++;viewer.replaceChildren();photos=[];index=0;mainImage=caption=count=strip=null;if(returnFocus?.isConnected)returnFocus.focus({preventScroll:true});returnFocus=null;});
+  viewer.addEventListener('close',()=>{request++;detachSwipe?.();detachSwipe=null;preloads=[];viewer.replaceChildren();photos=[];index=0;mainImage=caption=count=strip=null;if(returnFocus?.isConnected)returnFocus.focus({preventScroll:true});returnFocus=null;});
   function makeCoversAccessible(){for(const image of content.querySelectorAll('.chem-cover img'))if(!image.closest('a,button')){image.setAttribute('role','button');image.tabIndex=0;image.setAttribute('aria-label','Enlarge: '+(image.alt||'Event photograph'));}}
   new MutationObserver(makeCoversAccessible).observe(content,{childList:true,subtree:true});
   content.addEventListener('keydown',event=>{if(event.target.matches('.chem-cover img[role=button]')&&['Enter',' '].includes(event.key)){event.preventDefault();event.target.click();}});

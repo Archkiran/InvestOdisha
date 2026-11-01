@@ -1,0 +1,107 @@
+/* Shared mobile treatment for the timeline, all event modules, and editing forms. */
+.mobile-admin-entry{display:none}
+@media(max-width:1024px) and (min-width:761px){
+ .client-header .navinner{grid-template-columns:minmax(150px,1fr) auto auto;gap:20px}
+ .client-menu{gap:22px}
+ .timeline-layout{grid-template-columns:150px minmax(0,1fr);gap:24px}
+ .ecard{grid-template-columns:minmax(0,1fr) 160px}
+ .ecard-content{padding:18px}
+}
+@media(max-width:760px){
+ html{scroll-padding-top:80px;-webkit-text-size-adjust:100%}
+ .shell{padding-left:16px;padding-right:16px;max-width:100%;min-width:0}
+ .client-header{position:relative;top:auto}
+ .client-header .navinner{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:3px 12px;min-height:88px;height:auto;padding-top:10px;padding-bottom:10px}
+ .client-header .brand{grid-column:1;grid-row:1/3;min-width:0}
+ .client-header .brand-logo{width:clamp(120px,35vw,164px);height:60px;max-width:100%;object-fit:contain}
+ .client-header .social-links{grid-column:2;grid-row:1;gap:6px;display:flex;justify-self:end}
+ .client-header .social-links a{width:28px;height:28px;min-width:28px}
+ .client-header .social-links svg{width:15px;height:15px}
+ .header-clock{grid-column:2;grid-row:2;max-width:100%;line-height:1.35}
+ .header-clock span{font-size:10px}.header-clock time{font-size:12px}
+ .client-menu{display:grid;grid-template-columns:1.55fr 1fr .75fr;gap:8px;align-items:stretch;flex-wrap:nowrap}
+ .client-menu a{font-size:14px;text-align:center;display:flex;align-items:center;justify-content:center;min-height:44px;padding:9px 0 7px;line-height:1.2;white-space:normal}
+ .mobile-admin-entry{display:block;margin-top:20px;padding-top:12px;border-top:1px solid #ffffff22}
+ .mobile-admin-entry .admin-signin{display:inline-flex;align-items:center;min-height:44px;margin:0;padding:0;border:0;background:transparent;color:#ccc;font:inherit;font-size:13px;text-decoration:underline;text-underline-offset:4px;cursor:pointer}
+ .mobile-admin-entry .admin-signin:hover{color:#fff}
+ .client-banner{padding:22px 0}.client-banner p{font-size:17px;line-height:1.5}
+ .archive-tools{padding:20px 0;gap:16px}
+ .archive-tools .hero-stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;width:100%}
+ .archive-tools .stat strong{font-size:clamp(18px,5.4vw,24px);line-height:1.3;white-space:nowrap}
+ .archive-tools .stat span{display:block;font-size:10px;line-height:1.4;letter-spacing:.02em;margin-top:4px}
+ .archive-tools .nav-actions{width:100%;gap:8px}.archive-tools .nav-actions .btn{flex:1;min-height:44px;padding:9px;font-size:12px}
+ .filters{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:9px;padding:20px 0 14px}
+ .filters .search{grid-column:1/-1;min-width:0;width:100%}
+ .filters .search input,.filters select{font-size:16px;min-width:0;width:100%;max-width:100%}
+ .filters>.btn{grid-column:2;justify-self:end;width:100%;font-size:14px}
+ .timeline-results{margin:0 0 12px;font-size:13px}
+ .mobile-timeline-nav{top:0;gap:8px;padding:8px 0;margin-bottom:12px}
+ .mobile-timeline-nav label{font-size:11px;min-width:0}.mobile-timeline-nav select{min-height:44px;font-size:16px;padding:6px}
+ .mobile-event-map{font-size:14px;padding:0 2px}
+ .timeline-layout{display:block;padding-top:0}
+ #yearnav.side{position:static;display:flex;max-width:100%;min-width:0;gap:12px;overflow-x:auto;flex-wrap:nowrap;padding:5px 0 16px;align-items:center;scrollbar-width:thin}
+ #yearnav .jump{flex:0 0 auto;width:auto;font-size:21px;padding:8px 0}
+ #yearnav .explore-event-map{font-size:14px;min-height:44px;margin:0;flex:0 0 auto}
+ #yearnav .explore-event-map::before{margin-right:10px}
+ .timeline{margin-left:6px;padding-left:16px;margin-bottom:40px;min-width:0}
+ .yearheading{padding-bottom:14px}.yearheading:before{left:-23px}.yearheading h2{font-size:32px}
+ .monthheading{font-size:15px;margin:22px 0 14px}
+ .monthheading,.yearheading{scroll-margin-top:100px}
+ .event{grid-template-columns:32px minmax(0,1fr);gap:10px;margin-bottom:20px;min-width:0}
+ .event:before{left:-20px}.date{padding-top:15px}.date strong{font-size:22px}.date span{font-size:10px}
+ .ecard{display:grid;grid-template-columns:minmax(0,1fr);min-height:0;min-width:0;border-radius:8px}
+ .ecard .photo{grid-row:1;aspect-ratio:16/10;min-height:0;width:100%}
+ .ecard .photo img{object-fit:contain;object-position:center}
+ .ecard-content{padding:14px;min-width:0}.ecard .tag{font-size:10px;line-height:1.4}
+ .ecard h3{font-size:18px;line-height:1.3;margin:8px 0;overflow-wrap:anywhere}
+ .ecard p{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;font-size:14px;line-height:1.5}
+ .ecard .view{display:inline-flex;align-items:center;min-height:36px;font-size:12px;margin-top:6px}
+ .overlay{padding:0}
+ .overlay>.modal,.overlay>.modal.chem-modal{width:100%;max-width:none;max-height:100vh;max-height:100dvh;height:100vh;height:100dvh;border-radius:0;overscroll-behavior:contain;scrollbar-gutter:auto}
+ .modal.has-section-rail{padding-right:28px}
+ .modal>.close{position:fixed;top:max(8px,env(safe-area-inset-top));right:8px;width:44px;height:44px;font-size:24px;background:#fffffff0;box-shadow:0 2px 12px #0001;z-index:23}
+ .modal .modalinner{padding:24px 16px}.modal.chem-modal .modalinner{padding:0}
+ .modal .chem-head{padding:24px 16px 18px}.modal h2,.modal .chem-head h2{font-size:clamp(26px,7vw,32px);line-height:1.2;margin:9px 36px 12px 0;overflow-wrap:anywhere}
+ .modal .chem-body,.modal .chem-editor{padding:20px 16px 28px;min-width:0}
+ .modal p,.modal .chem-section p,.modal .chem-overview p{font-size:16px;line-height:1.65;overflow-wrap:anywhere}
+ .modal .meta{font-size:13px;line-height:1.5;overflow-wrap:anywhere}
+ .modal .chem-cover img{width:100%;height:auto;max-height:55svh;object-fit:contain}
+ .modal .chem-cover figcaption{padding:10px 16px;font-size:12px;line-height:1.5}
+ .modal .chem-stats{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin-bottom:22px}
+ .modal .chem-stat{padding:12px 10px;min-width:0}.modal .chem-stat strong{font-family:inherit;font-size:21px;line-height:1.2;letter-spacing:0;overflow-wrap:anywhere}
+ .modal .chem-stat span{font-size:10px;line-height:1.4;letter-spacing:.03em}
+ .modal .chem-section{padding-top:22px;margin-top:22px;min-width:0}.modal .chem-section h3{font-family:inherit;font-size:22px;line-height:1.3;letter-spacing:0;overflow-wrap:anywhere}
+ .modal .chem-section-title{flex-wrap:wrap;gap:8px}
+ .modal .chem-index{flex-wrap:nowrap;overflow-x:auto;max-width:100%;gap:8px;margin-top:20px;padding:2px 2px 14px;overscroll-behavior-inline:contain;scrollbar-width:thin}
+ .modal .chem-index button{flex:0 0 auto;max-width:85%;min-height:44px;font-size:13px;line-height:1.35;white-space:normal;text-align:left;padding:8px 12px}
+ .modal .chem-gallery{display:flex;gap:12px;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;scroll-padding-inline:2px;overscroll-behavior-inline:contain;padding:2px 2px 12px;max-width:100%;scrollbar-width:thin;justify-content:flex-start}
+ .modal .chem-gallery figure{flex:0 0 100%;min-width:0;scroll-snap-align:start;scroll-snap-stop:always;overflow-wrap:anywhere}
+ .modal .chem-gallery .chem-photo-button img{width:100%;height:auto;aspect-ratio:4/3;max-height:65svh;object-fit:contain}
+ .modal .chem-gallery figcaption{font-size:13px;line-height:1.5}
+ .modal .gallery{display:flex;overflow-x:auto;gap:12px;max-width:100%;scroll-snap-type:x mandatory;overscroll-behavior-inline:contain}
+ .modal .gallery .tile{flex:0 0 100%;height:auto;aspect-ratio:4/3;scroll-snap-align:start}
+ .modal .chem-tools,.modal .event-share-tools{display:flex;gap:8px;flex-wrap:wrap;margin:16px 0}
+ .modal .chem-tools .btn,.modal .event-share-tools>.btn{flex:1 1 115px;min-height:44px;max-width:100%;padding:10px;line-height:1.4;white-space:normal;text-align:center;overflow-wrap:anywhere}
+ .modal a{overflow-wrap:anywhere}.modal .slswca-source{display:inline-flex;align-items:center;min-height:44px;font-size:14px;line-height:1.4}
+ .modal .slswca-table-wrap{max-width:100%;overflow-x:auto}.modal .slswca-projects{width:100%;table-layout:fixed;font-size:14px;overflow-wrap:anywhere}
+ .modal .slswca-projects td,.modal .slswca-projects th{padding:9px 7px}
+ .modal .slswca-metrics{gap:9px}.modal .slswca-metrics strong{font-family:inherit;font-size:21px;line-height:1.2;letter-spacing:0;overflow-wrap:anywhere}
+ .modal .formgrid,.modal .chem-editor .chem-stat-fields{grid-template-columns:minmax(0,1fr)}
+ .modal .field input,.modal .field select,.modal .field textarea{font-size:16px;min-height:44px;max-width:100%}
+ .modal .chem-photo-actions{gap:10px}.modal .chem-text-button{min-height:44px;font-size:13px}
+ .modal .chem-upload{padding:12px;max-width:100%}.modal input[type=file]{width:100%;min-width:0;max-width:100%;font-size:14px}
+ .modal .chem-editor fieldset{min-width:0;padding:12px}
+ .modal .signin-panel .signin-status{font-size:11px}.modal .signin-panel h2{margin-top:18px}
+ .event-section-marker{min-height:32px;height:32px;flex-basis:32px}
+ .event-photo-viewer{width:100vw;height:100vh;height:100dvh;margin:0;padding:max(10px,env(safe-area-inset-top)) 10px max(8px,env(safe-area-inset-bottom));border:0;border-radius:0}
+ .event-photo-viewer[open]{gap:8px}.event-photo-toolbar{min-width:0;font-size:13px;min-height:44px}
+ .event-photo-toolbar button{min-height:44px;min-width:44px;padding:8px 12px;font-size:14px}
+ .event-photo-toolbar>div{gap:5px}.event-photo-stage{border-radius:4px}
+ .event-photo-caption{font-size:13px;line-height:1.5;max-height:6em;overflow-wrap:anywhere}
+ .event-photo-filmstrip{min-height:70px;gap:7px;padding:4px 2px 8px;scroll-snap-type:x proximity;overscroll-behavior-inline:contain}
+ .event-photo-thumb{flex-basis:60px;width:60px;height:54px;scroll-snap-align:center}
+ .back-to-top{right:12px;bottom:max(12px,env(safe-area-inset-bottom));min-height:44px;font-size:12px;padding:9px 13px}
+ .client-footer{padding:28px 0}.client-footer p{font-size:15px;line-height:1.65}
+}
+@media(max-width:359px){.shell{padding-inline:12px}.client-menu{gap:5px}.client-menu a{font-size:13px}.client-banner p{font-size:16px}.event{grid-template-columns:28px minmax(0,1fr);gap:8px}.ecard-content{padding:12px}.ecard h3{font-size:17px}.mobile-event-map{font-size:12px}.modal .chem-body,.modal .chem-head{padding-inline:12px}}
+@media(max-width:760px) and (orientation:landscape){.event-photo-viewer[open]{grid-template-columns:minmax(0,1fr) 170px;grid-template-rows:auto minmax(0,1fr) auto}.event-photo-toolbar{grid-column:1/-1}.event-photo-stage{grid-column:1;grid-row:2/4}.event-photo-caption{grid-column:2;grid-row:2;max-height:none}.event-photo-filmstrip{grid-column:2;grid-row:3;min-width:0}}
