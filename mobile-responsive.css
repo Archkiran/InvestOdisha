@@ -14,7 +14,8 @@
  .client-header{position:relative;top:auto}
  .client-header .navinner{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 12px;min-height:0;height:auto;padding-top:10px;padding-bottom:10px;align-items:center}
  .client-header .brand{grid-column:1;grid-row:1;min-width:0;align-self:center}
- .client-header .brand-logo{width:clamp(120px,35vw,164px);height:46px;max-width:100%;object-fit:contain}
+ /* Fill the slot using the original mark; only its empty outer padding is cropped. */
+ .client-header .brand-logo{width:clamp(120px,35vw,164px);height:46px;max-width:100%;object-fit:cover;object-position:center}
  .client-header .social-links{grid-column:2;grid-row:1;gap:6px;display:flex;justify-self:end;align-self:center}
  .client-header .social-links a{width:28px;height:28px;min-width:28px}
  .client-header .social-links svg{width:15px;height:15px}
