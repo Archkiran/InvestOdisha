@@ -1,5 +1,6 @@
 /* Shared mobile treatment for the timeline, all event modules, and editing forms. */
 .mobile-admin-entry{display:none}
+.mobile-gallery-hint{display:none}
 @media(max-width:1024px) and (min-width:761px){
  .client-header .navinner{grid-template-columns:minmax(150px,1fr) auto auto;gap:20px}
  .client-menu{gap:22px}
@@ -32,6 +33,8 @@
  .archive-tools .nav-actions{width:100%;gap:8px}.archive-tools .nav-actions .btn{flex:1;min-height:44px;padding:9px;font-size:12px}
  .filters{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:9px;padding:20px 0 14px}
  .filters .search{grid-column:1/-1;min-width:0;width:100%}
+ /* The sticky year selector below supplies the same filter, without a duplicate row. */
+ .filters>#year{display:none}.filters>#category{grid-column:1}
  .filters .search input,.filters select{font-size:16px;min-width:0;width:100%;max-width:100%}
  .filters>.btn{grid-column:2;justify-self:end;width:100%;font-size:14px}
  .timeline-results{margin:0 0 12px;font-size:13px}
@@ -39,10 +42,10 @@
  .mobile-timeline-nav label{font-size:11px;min-width:0}.mobile-timeline-nav select{min-height:44px;font-size:16px;padding:6px}
  .mobile-event-map{font-size:14px;padding:0 2px}
  .timeline-layout{display:block;padding-top:0}
- #yearnav.side{position:static;display:flex;max-width:100%;min-width:0;gap:12px;overflow-x:auto;flex-wrap:nowrap;padding:5px 0 16px;align-items:center;scrollbar-width:thin}
- #yearnav .jump{flex:0 0 auto;width:auto;font-size:21px;padding:8px 0}
- #yearnav .explore-event-map{font-size:14px;min-height:44px;margin:0;flex:0 0 auto}
- #yearnav .explore-event-map::before{margin-right:10px}
+ #yearnav.side{position:static;display:flex;max-width:100%;min-width:0;gap:8px;overflow-x:auto;flex-wrap:nowrap;padding:5px 0 16px;align-items:center;scrollbar-width:thin}
+ #yearnav .jump{flex:0 0 auto;width:auto;font-size:19px;padding:8px 0}
+ #yearnav .explore-event-map{font-size:13px;min-height:44px;margin:0;flex:0 0 auto}
+ #yearnav .explore-event-map::before{margin-right:8px}
  .timeline{margin-left:6px;padding-left:16px;margin-bottom:40px;min-width:0}
  .yearheading{padding-bottom:14px}.yearheading:before{left:-23px}.yearheading h2{font-size:32px}
  .monthheading{font-size:15px;margin:22px 0 14px}
@@ -78,6 +81,7 @@
  .modal .chem-gallery figure{flex:0 0 100%;min-width:0;scroll-snap-align:start;scroll-snap-stop:always;overflow-wrap:anywhere}
  .modal .chem-gallery .chem-photo-button img{width:100%;height:auto;aspect-ratio:4/3;max-height:65svh;object-fit:contain}
  .modal .chem-gallery figcaption{font-size:13px;line-height:1.5}
+ .modal .mobile-gallery-hint{display:block;font-size:12px;line-height:1.4;color:#737b80;margin:16px 0 0}
  .modal .gallery{display:flex;overflow-x:auto;gap:12px;max-width:100%;scroll-snap-type:x mandatory;overscroll-behavior-inline:contain}
  .modal .gallery .tile{flex:0 0 100%;height:auto;aspect-ratio:4/3;scroll-snap-align:start}
  .modal .chem-tools,.modal .event-share-tools{display:flex;gap:8px;flex-wrap:wrap;margin:16px 0}

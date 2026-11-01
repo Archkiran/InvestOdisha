@@ -12,7 +12,10 @@
   function describeGalleries(){
     for(const gallery of content.querySelectorAll('.chem-gallery')){
       const figures=gallery.querySelectorAll('figure');
-      if(figures.length>1){gallery.setAttribute('role','group');gallery.setAttribute('aria-label',figures.length+' photographs. Swipe horizontally to browse, or tap a photo to enlarge.');gallery.classList.add('swipe-gallery');}
+      if(figures.length>1){
+        gallery.setAttribute('role','group');gallery.setAttribute('aria-label',figures.length+' photographs. Swipe horizontally to browse, or tap a photo to enlarge.');gallery.classList.add('swipe-gallery');
+        if(!gallery.previousElementSibling?.classList.contains('mobile-gallery-hint')){const hint=document.createElement('p');hint.className='mobile-gallery-hint';hint.textContent=figures.length+' photos · Swipe to browse · Tap to enlarge';gallery.before(hint);}
+      }
       figures.forEach((figure,i)=>{figure.setAttribute('aria-label','Photograph '+(i+1)+' of '+figures.length);});
       for(const img of gallery.querySelectorAll('img'))img.draggable=false;
     }
