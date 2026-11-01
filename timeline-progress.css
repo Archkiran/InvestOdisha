@@ -1,0 +1,4 @@
+/* Follow the date being read without moving the timeline or its cards. */
+#timeline .event::before{transition:background-color .2s ease,box-shadow .2s ease,transform .2s ease}
+#timeline .event.timeline-current::before{background:var(--red);box-shadow:0 0 0 4px #b000001a;transform:scale(1.35)}
+@media(prefers-reduced-motion:reduce){#timeline .event::before{transition:none}}
