@@ -12,14 +12,14 @@
  html{scroll-padding-top:80px;-webkit-text-size-adjust:100%}
  .shell{padding-left:16px;padding-right:16px;max-width:100%;min-width:0}
  .client-header{position:relative;top:auto}
- .client-header .navinner{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:3px 12px;min-height:88px;height:auto;padding-top:10px;padding-bottom:10px}
- .client-header .brand{grid-column:1;grid-row:1/3;min-width:0}
- .client-header .brand-logo{width:clamp(120px,35vw,164px);height:60px;max-width:100%;object-fit:contain}
- .client-header .social-links{grid-column:2;grid-row:1;gap:6px;display:flex;justify-self:end}
+ .client-header .navinner{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 12px;min-height:0;height:auto;padding-top:10px;padding-bottom:10px;align-items:center}
+ .client-header .brand{grid-column:1;grid-row:1;min-width:0;align-self:center}
+ .client-header .brand-logo{width:clamp(120px,35vw,164px);height:46px;max-width:100%;object-fit:contain}
+ .client-header .social-links{grid-column:2;grid-row:1;gap:6px;display:flex;justify-self:end;align-self:center}
  .client-header .social-links a{width:28px;height:28px;min-width:28px}
  .client-header .social-links svg{width:15px;height:15px}
- .header-clock{grid-column:2;grid-row:2;max-width:100%;line-height:1.35}
- .header-clock span{font-size:10px}.header-clock time{font-size:12px}
+ .header-clock{grid-column:1/-1;grid-row:2;max-width:100%;line-height:1.5;display:flex;align-items:baseline;justify-content:center;justify-self:stretch;gap:9px;text-align:center;white-space:normal}
+ .header-clock span{font-size:11px}.header-clock time{font-size:11px;white-space:nowrap}
  .client-menu{display:grid;grid-template-columns:1.55fr 1fr .75fr;gap:8px;align-items:stretch;flex-wrap:nowrap}
  .client-menu a{font-size:14px;text-align:center;display:flex;align-items:center;justify-content:center;min-height:44px;padding:9px 0 7px;line-height:1.2;white-space:normal}
  .mobile-admin-entry{display:block;margin-top:20px;padding-top:12px;border-top:1px solid #ffffff22}
@@ -44,7 +44,7 @@
  .timeline-layout{display:block;padding-top:0}
  #yearnav.side{position:static;display:flex;max-width:100%;min-width:0;gap:8px;overflow-x:auto;flex-wrap:nowrap;padding:5px 0 16px;align-items:center;scrollbar-width:thin}
  #yearnav .jump{flex:0 0 auto;width:auto;font-size:19px;padding:8px 0}
- #yearnav .explore-event-map{font-size:13px;min-height:44px;margin:0;flex:0 0 auto}
+ #yearnav .explore-event-map{display:none}
  #yearnav .explore-event-map::before{margin-right:8px}
  .timeline{margin-left:6px;padding-left:16px;margin-bottom:40px;min-width:0}
  .yearheading{padding-bottom:14px}.yearheading:before{left:-23px}.yearheading h2{font-size:32px}
