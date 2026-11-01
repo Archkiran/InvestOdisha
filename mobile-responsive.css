@@ -1,6 +1,7 @@
 /* Shared mobile treatment for the timeline, all event modules, and editing forms. */
 .mobile-admin-entry{display:none}
 .mobile-gallery-hint{display:none}
+.header-clock{min-height:48px}
 @media(max-width:1024px) and (min-width:761px){
  .client-header .navinner{grid-template-columns:minmax(150px,1fr) auto auto;gap:20px}
  .client-menu{gap:22px}
@@ -19,11 +20,12 @@
  .client-header .social-links{grid-column:2;grid-row:1;gap:6px;display:flex;justify-self:end;align-self:center}
  .client-header .social-links a{width:28px;height:28px;min-width:28px}
  .client-header .social-links svg{width:15px;height:15px}
- .header-clock{grid-column:1/-1;grid-row:2;max-width:100%;line-height:1.5;display:flex;align-items:baseline;justify-content:center;justify-self:stretch;gap:9px;text-align:center;white-space:normal}
+ .header-clock{grid-column:1/-1;grid-row:2;max-width:100%;min-height:17px;line-height:1.5;display:flex;align-items:baseline;justify-content:center;justify-self:stretch;gap:9px;text-align:center;white-space:normal}
  .header-clock span{font-size:11px}.header-clock time{font-size:11px;white-space:nowrap}
  .client-menu{display:grid;grid-template-columns:1.55fr 1fr .75fr;gap:8px;align-items:stretch;flex-wrap:nowrap}
  .client-menu a{font-size:14px;text-align:center;display:flex;align-items:center;justify-content:center;min-height:44px;padding:9px 0 7px;line-height:1.2;white-space:normal}
  .mobile-admin-entry{display:block;margin-top:20px;padding-top:12px;border-top:1px solid #ffffff22}
+ .client-menu .admin-signin{display:none}
  .mobile-admin-entry .admin-signin{display:inline-flex;align-items:center;min-height:44px;margin:0;padding:0;border:0;background:transparent;color:#ccc;font:inherit;font-size:13px;text-decoration:underline;text-underline-offset:4px;cursor:pointer}
  .mobile-admin-entry .admin-signin:hover{color:#fff}
  .client-banner{padding:22px 0}.client-banner p{font-size:17px;line-height:1.5}
