@@ -3,6 +3,9 @@
   const timeline=document.getElementById('timeline'),overlay=document.getElementById('overlay');
   if(!timeline||!overlay)return;
   const panel=overlay.querySelector('.modal'),content=document.getElementById('modalcontent');
+  document.getElementById('search').setAttribute('aria-label','Search events, meetings and places');
+  document.getElementById('year').setAttribute('aria-label','Filter by year');
+  document.getElementById('category').setAttribute('aria-label','Filter by category');
   let currentEvent=null,opener=null,fromHistory=false,decorating=false,initialAddressPending=true;
   const reduced=()=>window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const smooth=()=>reduced()?'auto':'smooth';
@@ -14,6 +17,7 @@
   nav.innerHTML='<label for="mobile-timeline-year">Jump to year<select id="mobile-timeline-year"></select></label><label for="mobile-timeline-month">Jump to month<select id="mobile-timeline-month"><option value="">Choose a year first</option></select></label>';
   layout.before(nav);
   const year=nav.querySelector('#mobile-timeline-year'),month=nav.querySelector('#mobile-timeline-month');
+  year.setAttribute('aria-label','Jump to year');month.setAttribute('aria-label','Jump to month');
   const topButton=document.createElement('button');topButton.className='back-to-top';topButton.type='button';topButton.textContent='↑ Back to top';topButton.hidden=window.scrollY<500;document.body.append(topButton);
   topButton.addEventListener('click',()=>{window.scrollTo({top:0,behavior:smooth()});document.querySelector('.client-menu a')?.focus({preventScroll:true});});
   function updateHeader(){const height=document.querySelector('.client-header')?.getBoundingClientRect().height||160;document.documentElement.style.setProperty('--timeline-header-height',height+'px');}
