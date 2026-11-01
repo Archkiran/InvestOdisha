@@ -92,7 +92,7 @@ render();
   showEvent=async id=>{await baseShowEvent(id);const e=events.find(x=>x.id===id);if(e?.sourceUrl){const meta=document.querySelector('#modalcontent .meta');if(meta){const link=document.createElement('a');link.href=e.sourceUrl;link.target='_blank';link.rel='noopener';link.textContent='Read source coverage ↗';link.style.cssText='display:inline-block;margin-left:12px;color:#bc4839;font-weight:700';meta.append(link)}}};
   render();
 </script>
-<link rel="stylesheet" href="india-chem-2026/event.css">
+<link rel="stylesheet" href="india-chem-2026/event.css?v=cover-20261101">
 <script src="image-thumbnails.js"></script>
 <script src="india-chem-2026/event.js"></script>
 <script src="kalinganagar-2026/event.js"></script>
@@ -311,4 +311,6 @@ if(typeof MutationObserver==='function'){
   document.querySelector('.client-header').after(notice);
 }
 </script>
+<link rel="stylesheet" href="cover-presentation.css?v=1">
+<script src="cover-selections.js?v=1"></script>
 </body></html>
