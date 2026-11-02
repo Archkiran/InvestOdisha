@@ -1,12 +1,16 @@
 /* Extend existing controls and event views without changing the archived records. */
 (()=>{
+ let printOpen=false,printDismissedUntil=0;
+ window.addEventListener('beforeprint',()=>{printOpen=true;});
+ window.addEventListener('afterprint',()=>{printOpen=false;printDismissedUntil=Date.now()+700;});
+ document.addEventListener('keydown',event=>{if(event.key==='Escape'&&(printOpen||Date.now()<printDismissedUntil)){event.stopImmediatePropagation();}},true);
  const tools=window.timelineTools,filters=document.querySelector('.filters'),timeline=document.getElementById('timeline');if(!tools||!filters||!timeline)return;
  const sector=document.createElement('select');sector.id='sector';sector.setAttribute('aria-label','Filter by recorded sector');
  sector.title='Based only on explicitly labelled sector sections; many events do not have sector records.';
  sector.append(new Option('All sectors',''),...toolsSectorOptions());
  function toolsSectorOptions(){return [...new Set(events.flatMap(tools.sectors))].sort().map(label=>new Option(label,label)).concat(new Option('No sector recorded','unrecorded'));}
  filters.insertBefore(sector,filters.querySelector('.btn'));sector.addEventListener('change',()=>render());
- const explanation=document.createElement('p');explanation.className='sector-help';explanation.textContent='Sector filters use recorded sector sections, not inferred locations or company names.';filters.after(explanation);
+ const explanation=document.createElement('p');explanation.className='sector-help';explanation.textContent='Choose All sectors to include events without sector details.';filters.after(explanation);
  const search=document.getElementById('search');search.placeholder='Search events, people or places…';search.setAttribute('aria-keyshortcuts','Control+k Meta+k');search.title='Search events · Ctrl/Cmd + K';
  document.addEventListener('keydown',event=>{if((event.ctrlKey||event.metaKey)&&!event.altKey&&event.key.toLowerCase()==='k'&&!document.querySelector('.overlay.show,dialog[open]')){event.preventDefault();search.focus();search.select();}});
  const oldReset=resetFilters;resetFilters=()=>{sector.value='';oldReset();};
