@@ -12,6 +12,7 @@
 .event-photo-zoom .zoom-help{color:#e1e5e8;font-size:12px}
 .event-photo-stage.is-zoomed{touch-action:none;cursor:grab}.event-photo-stage.is-zoomed:active{cursor:grabbing}
 .event-photo-stage.is-zoomed img{will-change:transform}
+.event-correction{display:flex;flex-wrap:wrap;align-items:center;gap:4px 12px;margin-top:12px}.event-correction-link{color:#a60000;font-size:14px;min-height:44px;display:inline-flex;align-items:center;text-underline-offset:4px}.event-correction small{color:#626b70;font-size:12px}.event-correction-link:focus-visible{outline:2px solid #a60000;outline-offset:3px}
 .event-print-summary{display:none}
 @media(max-width:760px){
  .filters #category,.filters #sector{min-width:0;width:100%;max-width:none;font-size:16px}

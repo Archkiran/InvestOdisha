@@ -25,6 +25,14 @@
    button.disabled=true;const label=button.textContent;button.textContent='Preparing summary…';
    try{await preparePrint(record);window.print();}catch{alert('The event summary could not be prepared. Please try again.');}finally{button.disabled=false;button.textContent=label;}
   });actions.append(button);
+  const report=document.createElement('a');report.className='event-correction-link';report.textContent='Report a correction ↗';report.target='_blank';report.rel='noopener noreferrer';
+  const eventLink=new URL('https://ipicoltimeline.pages.dev/Invest_Odisha_Admin');eventLink.searchParams.set('event',record.id);
+  const issue=new URL('https://github.com/Archkiran/InvestOdisha/issues/new');
+  issue.searchParams.set('title',`Correction: ${record.title} (${record.id})`);
+  issue.searchParams.set('body',`Event: ${record.title}\nEvent ID: ${record.id}\nEvent link: ${eventLink.href}\n\n### What needs correcting?\nDescribe the incorrect text, caption, photograph or broken link.\n\n### Suggested correction\nProvide the corrected details here.\n\n### Supporting source\nAdd a reliable source link, if available.\n\nPlease do not include passwords or private personal information. This report will be public.`);
+  report.href=issue.href;report.setAttribute('aria-describedby','correction-privacy-note');
+  const reporting=document.createElement('div');reporting.className='event-correction';reporting.append(report);
+  const note=document.createElement('small');note.id='correction-privacy-note';note.textContent='Opens GitHub · Account required · Reports are public';reporting.append(note);actions.after(reporting);
  };
  const text=(tag,value,parent)=>{const node=document.createElement(tag);node.textContent=value||'';parent.append(node);return node;};
  const safeUrl=value=>{try{const url=new URL(value,location.href);return ['http:','https:'].includes(url.protocol)?url.href:null;}catch{return null;}};
