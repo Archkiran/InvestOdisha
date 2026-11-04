@@ -46,8 +46,7 @@
   let selected='',mode='india',records=[],opener=null,savedScroll=0,priorOverflow='',zoom=1,center=[310,300],dragged=false,dragStart=null,pinchStart=null;
   const pointers=new Map();
   const visibleEvents=()=>{
-    const ids=new Set(Array.from(timeline.querySelectorAll('.ecard')).map(card=>card.getAttribute('onclick')?.match(/showEvent\('([^']+)'\)/)?.[1]).filter(Boolean));
-    return events.filter(event=>ids.has(event.id)).sort((a,b)=>String(b.date).localeCompare(String(a.date))).map(event=>({event,...classify(event)}));
+    return [...events].sort((a,b)=>String(b.date).localeCompare(String(a.date))).map(event=>({event,...classify(event)}));
   };
   const counts=()=>Object.fromEntries(['india','international','unplaced'].map(kind=>[kind,records.filter(row=>row.kind===kind).length]));
   function renderTabs(){const n=counts();tabs.innerHTML=[['india','India'],['international','Asia · Overseas'],['unplaced','Media & Features']].map(([key,label])=>'<button type="button" data-map-mode="'+key+'" aria-pressed="'+(mode===key)+'">'+label+' · '+n[key]+'</button>').join('');}
@@ -73,19 +72,18 @@
     svg.setAttribute('aria-label',mode==='international'?'Zoomable Asia map with UAE and Singapore event groups':'Zoomable India map with event location groups');updateView();
   }
   function renderResults(){
-    const active=cityCounts();if(mode!=='unplaced'&&!active.some(city=>city.name===selected))selected=active[0]?.name||'';
-    const rows=records.filter(row=>row.kind===mode&&(mode==='unplaced'||row.cities.includes(selected)));
-    const title=mode==='unplaced'?'Media & Features':selected||(mode==='international'?'No overseas events':'No mapped events');
+    const active=cityCounts();if(mode!=='unplaced'&&selected!=='all'&&!active.some(city=>city.name===selected))selected=active[0]?.name||'';
+    const rows=records.filter(row=>row.kind===mode&&(mode==='unplaced'||selected==='all'||row.cities.includes(selected)));
+    const title=mode==='unplaced'?'Media & Features':(selected==='all'?'All locations':selected)||(mode==='international'?'No overseas events':'No mapped events');
     const note=mode==='unplaced'?'Magazine and newspaper articles, interviews, and other coverage without a location grouping.':selected==='Odisha-wide'?'Other Odisha-related entries without a confirmed city. This is a statewide grouping, not a confirmed event venue.':rows.length+' '+(rows.length===1?'event':'events')+' grouped by location. Select a pin or a place below. Zoom in to separate nearby pins.';
-    results.innerHTML='<h3>'+escape(title)+'</h3><p class="map-results-note">'+escape(note)+'</p>'+(mode!=='unplaced'?'<div class="event-map-city-list" role="group" aria-label="Choose an event location">'+active.map(city=>'<button type="button" data-map-city="'+escape(city.name)+'" aria-pressed="'+(selected===city.name)+'">'+(city.region?'◇ ':'')+escape(city.name)+' · '+city.count+'</button>').join('')+'</div>':'')+'<div class="event-map-event-list">'+rows.map(({event,match})=>'<button type="button" class="event-map-event" data-map-event="'+escape(event.id)+'"><time>'+escape(new Date(event.date+'T12:00:00').toLocaleDateString('en-IN',{day:'numeric',month:'long',year:'numeric'}))+'</time><strong>'+escape(clean(event.title))+'</strong><span>'+escape(match==='region'?'Odisha-wide · regional grouping':clean(event.location)||'Grouped by event location keywords')+' · Explore event ↗</span></button>').join('')+(rows.length?'':'<p class="map-results-note">No events here with the current timeline filters. Close the map and try another year or clear the filters.</p>')+'</div>';results.scrollTop=0;
+    results.innerHTML='<h3>'+escape(title)+'</h3><p class="map-results-note">'+escape(note)+'</p>'+(mode!=='unplaced'?'<div class="event-map-city-list" role="group" aria-label="Choose an event location">'+'<button type="button" data-map-city="all" aria-pressed="'+(selected==='all')+'">All locations</button>'+active.map(city=>'<button type="button" data-map-city="'+escape(city.name)+'" aria-pressed="'+(selected===city.name)+'">'+(city.region?'◇ ':'')+escape(city.name)+' · '+city.count+'</button>').join('')+'</div>':'')+'<div class="event-map-event-list">'+rows.map(({event,match})=>'<button type="button" class="event-map-event" data-map-event="'+escape(event.id)+'"><time>'+escape(new Date(event.date+'T12:00:00').toLocaleDateString('en-IN',{day:'numeric',month:'long',year:'numeric'}))+'</time><strong>'+escape(clean(event.title))+'</strong><span>'+escape(match==='region'?'Odisha-wide · regional grouping':clean(event.location)||'Grouped by event location keywords')+' · Explore event ↗</span></button>').join('')+(rows.length?'':'<p class="map-results-note">No events are recorded for this location.</p>')+'</div>';results.scrollTop=0;
     const strip=results.querySelector('.event-map-city-list'),chosen=strip?.querySelector('[aria-pressed="true"]');
     if(strip?.clientWidth&&Number.isFinite(chosen?.offsetLeft))strip.scrollLeft=Math.max(0,chosen.offsetLeft-strip.offsetLeft-(strip.clientWidth-chosen.offsetWidth)/2);
   }
   function paint(){renderTabs();renderResults();renderMap();}
   function openMap(event){
-    opener=event.currentTarget;savedScroll=window.scrollY;records=visibleEvents();mode='india';selected='Bhubaneswar';zoom=1;center=[310,300];
-    const year=document.getElementById('year').value||'All years',category=document.getElementById('category'),search=document.getElementById('search').value.trim();
-    dialog.querySelector('#event-map-context').textContent=[year,category.value?category.selectedOptions[0].textContent:'All categories',search?'Search: '+search:'',records.length+' events in the current timeline'].filter(Boolean).join(' · ');
+    opener=event.currentTarget;savedScroll=window.scrollY;records=visibleEvents();mode='india';selected='all';zoom=1;center=[310,300];
+    dialog.querySelector('#event-map-context').textContent='All years · All categories · '+records.length+' events across all locations';
     priorOverflow=document.body.style.overflow;document.body.style.overflow='hidden';dialog.showModal();paint();dialog.querySelector('.event-map-body').scrollTop=0;dialog.querySelector('.event-map-close').focus({preventScroll:true});
   }
   function selectCity(name,focusMap=false){
